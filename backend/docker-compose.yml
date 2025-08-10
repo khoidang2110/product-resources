@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    ports:
+      - "4000:4000"
+    environment:
+      - PGUSER=postgres
+      - PGPASSWORD=postgrespassword
+      - PGHOST=db    # Thay bằng IP hoặc hostname VPS db
+      - PGDATABASE=productsdb
+      - PGPORT=5432             # port của db trên VPS
+    networks:
+      - product-network
+networks:
+  product-network:
+    external: true

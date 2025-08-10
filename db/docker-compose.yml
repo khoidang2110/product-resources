@@ -1,0 +1,22 @@
+
+
+services:
+  db:
+    image: postgres:16.4
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: productsdb
+    volumes:
+      - pgdata_product:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5433:5432"   # expose port 5433 cho host
+    networks:
+      - product-network
+volumes:
+  pgdata_product:
+networks:
+  product-network:
+    external: true
+
